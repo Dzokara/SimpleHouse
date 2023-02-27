@@ -147,10 +147,12 @@ function makeNav(data){
 function makeShop(data){
     let html="";
     if (data.length==0) {
+        document.getElementById("tm-gallery-page-pizza").classList.add("justify-content-center");
         html+=`<h3 class="tm-mb-45">Oops, seems like none of our food matches your selection, send us your suggestions!</h3>
         `
     }
     else{
+    document.getElementById("tm-gallery-page-pizza").classList.remove("justify-content-center");
     for (let it of data) {
         html+=`  <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
                     <figure>
