@@ -1,14 +1,14 @@
 [
     {
-        "href": "/index.html",
+        "href": "index.html",
         "title": "Home"
     },
     {
-        "href": "/about.html",
+        "href": "about.html",
         "title": "About"
     },
     {
-        "href": "/contact.html",
+        "href": "contact.html",
         "title": "Contact"
     }
 ]
