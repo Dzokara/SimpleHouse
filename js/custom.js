@@ -18,7 +18,7 @@ window.onload=function(){
     //     }
     // });
 
-    if(window.location.href.indexOf("index.html")>-1||window.location.pathname === '/'){
+    if(window.location.href.indexOf("index.html")>-1|| window.location.href.endsWith("/")){
         getData("dish_types",function(data){
             makeDdl(data,"dishesSelect","filter","Dish types","dishes");
             saveLS("dish_types",data);
