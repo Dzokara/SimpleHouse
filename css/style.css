@@ -115,8 +115,9 @@ option{
 
 .justify-content-center{
   justify-content: center;
+}
+.align-center{
   align-items:center;
-
 }
 label[for=agreement]{
   color:#6c757d;
