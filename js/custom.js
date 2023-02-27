@@ -128,14 +128,20 @@ function makeNav(data){
     $("#navlinks").html(html);
 
     let currentPage=0;
-    for (let it of data) {
-        if (window.location.href.indexOf(it.href) > -1) {
-            document.querySelectorAll("#navlinks .tm-nav-li a")[currentPage].classList.add("active");
-        }
-        else{
-            currentPage++;
+    if(window.location.href.endsWith("/")){
+        document.querySelectorAll("#navlinks .tm-nav-li a")[currentPage].classList.add("active");
+    }
+    else{
+        for (let it of data) {
+            if (window.location.href.indexOf(it.href) > -1) {
+                document.querySelectorAll("#navlinks .tm-nav-li a")[currentPage].classList.add("active");
+            }
+            else{
+                currentPage++;
+            }
         }
     }
+    
 }
 
 function makeShop(data){
