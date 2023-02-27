@@ -131,3 +131,9 @@ footer hr{
   width:100%;
   display:flex;
 }
+
+@media (min-width: 459px) {
+  img.parallax-slider{
+    width:100%;
+  }
+}
