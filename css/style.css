@@ -127,9 +127,14 @@ footer hr{
   border:1px solid #2F956D;
   border-radius:100px;
 }
-#our-menu{
+#our-menu,#woman-eating{
   width:100%;
   display:flex;
+}
+@media(max-width:746px){
+  #woman-eating{
+    display:none;
+  }
 }
 
 @media (min-width: 459px) {
