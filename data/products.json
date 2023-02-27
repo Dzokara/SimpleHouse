@@ -1,0 +1,416 @@
+[
+      {
+        "id":1,
+        "name": "Beyond Meat Burger",
+        "categoryid": 2,
+        "typeid":3,
+        "vegan":false,
+        "price": {
+          "sm_price": 90,
+          "md_price": 95
+        },
+        "description": "Taking all the headlines for the last few years, the beyond-meat burger has been one of those food innovations that has helped shift the dial on how people perceive plant-based food in general.",
+        "image_url": {
+          "href":"Beyond meat burger.jpg",
+          "alt":"Beyond meat burger"
+        }
+      },
+      {
+        "id":2,
+        "name": "Summer Asian Slaw",
+        "categoryid": 4,
+        "typeid":1,
+        "vegan":true,
+        "price": {
+          "sm_price": 15.50,
+          "md_price": 25.50
+        },
+        "description": "A tahini miso dressing gives it a creamy umami coating, while peaches add juicy pops of sweetness. ",
+        "image_url": {
+          "href":"Summer Asian Slaw.jpg",
+          "alt":"Summer Asian Slaw"
+        }
+      },
+      {
+        "id":3,
+        "name": "Veggie burger",
+        "categoryid": 2,
+        "typeid":3,
+        "vegan":true,
+        "price": {
+          "sm_price": 50,
+          "md_price": 60
+        },
+        "description": "Once the lonely refuge of the only vegetarian in your group, the veggie burger now threatens to knock the beef burger off its perch.",
+        "image_url": {
+          "href":"Veggie burger.jpg",
+          "alt":"Veggie burger"
+        }
+      },
+      {
+        "id":4,
+        "name": "Greek Salad",
+        "categoryid": 4,
+        "typeid":1,
+        "vegan":true,
+        "price": {
+          "sm_price": 15,
+          "md_price": 25,
+          "lg_price": 35
+        },
+        "description": "Consists of tomatoes, cucumbers, olives, feta, and onions. It's lightly dressed with olive oil, salt, pepper, and oregano.",
+        "image_url": {
+          "href":"Greek Salad.jpg",
+          "alt":"Greek Salad"
+        }
+      },
+      {
+        "id":5,
+        "name": "Mexican Street Corn Salad",
+        "categoryid": 4,
+        "typeid":2,
+        "vegan":false,
+        "price": {
+          "sm_price": 35
+        },
+        "description": "Combination of charred corn, crumbly Cotija, creamy mayo, and cilantro is a hard one to beat.",
+        "image_url": {
+          "href":"Mexican Street Corn Salad.jpg",
+          "alt":"Mexican Street Corn Salad"
+        }
+      },
+      {
+        "id":6,
+        "name": "Cheeseburger",
+        "categoryid": 2,
+        "typeid":3,
+        "vegan":false,
+        "price": {
+          "sm_price": 80.99,
+          "md_price": 100,
+          "lg_price": 120
+        },
+        "description": "The addition of cheese transforms a burger... into a cheeseburger.",
+        "image_url": {
+          "href":"Cheeseburger.jpg",
+          "alt":"Cheeseburger"
+        }
+      },
+      {
+        "id":7,
+        "name": "Hawaiian Pizza",
+        "categoryid": 1,
+        "typeid":3,
+        "vegan":false,
+        "price": {
+          "sm_price": 60,
+          "md_price": 75
+        },
+        "description": "Ham and Pineapple on a base of mozzarella and tomato sauce.",
+        "image_url": {
+          "href":"Hawaiian Pizza.jpg",
+          "alt":"Hawaiian Pizza"
+        }
+      },
+      {
+        "id":9,
+        "name": "Cherry Tomato Couscous Salad",
+        "categoryid": 4,
+        "typeid":1,
+        "vegan":true,
+        "price": {
+          "sm_price": 20,
+          "md_price": 35
+        },
+        "description": "A mix of jammy roasted cherry tomatoes and juicy fresh ones. With spiced roasted chickpeas, tangy feta, and big pearls of couscous, it's hearty enough to be a meal on its own.",
+        "image_url": {
+          "href":"Cherry Tomato Couscous Salad.jpg",
+          "alt":"Cherry Tomato Couscous Salad"
+        }
+      },
+      {
+        "id":8,
+        "name": "Detroit Pizza",
+        "categoryid": 1,
+        "typeid":3,
+        "vegan":false,
+        "price": {
+          "sm_price": 65,
+          "md_price":80.99
+        },
+        "description": "Detroit pizza is first topped with pepperoni, followed by brick cheese which is spread to the very edges of the pan.",
+        "image_url": {
+          "href":"Detroit Pizza.jpg",
+          "alt":"Detroit Pizza"
+        }
+      },
+      {
+        "id":10,
+        "name": "Udon",
+        "categoryid": 3,
+        "typeid":3,
+        "vegan":false,
+        "price": {
+          "sm_price": 25,
+          "md_price": 50,
+          "lg_price": 70
+        },
+        "description": "You can’t go wrong with yaki udon for a mouthwatering Japanese dinner dish!",
+        "image_url": {
+          "href":"Udon.jpg",
+          "alt":"Udon Noodles"
+        }
+      },
+      {
+        "id":11,
+        "name": "Classic Caprese Salad",
+        "categoryid": 4,
+        "typeid":2,
+        "vegan":false,
+        "price": {
+          "sm_price": 10,
+          "md_price": 20.15
+        },
+        "description": "If it ain't broke, don't fix it.",
+        "image_url": {
+          "href":"Classic Caprese Salad.jpg",
+          "alt":"Classic Caprese Salad"
+        }
+      },
+      {
+        "id":12,
+        "name": "Sicilian Pizza",
+        "categoryid": 1,
+        "typeid":3,
+        "vegan":true,
+        "price": {
+          "sm_price": 70.99
+        },
+        "description": "Sicilian pizza, also known as sfincione, provides a thick cut of pizza with pillowy dough, a crunchy crust, and robust tomato sauce. This square-cut pizza is served with or without cheese.",
+        "image_url": {
+          "href":"Sicilian Pizza.jpg",
+          "alt":"Sicilian Pizza"
+        }
+      },
+      {
+        "id":13,
+        "name": "Pasta Salad",
+        "categoryid": 4,
+        "typeid":2,
+        "vegan":true,
+        "price": {
+          "sm_price": 25
+        },
+        "description": "Heavenly tangy / creamy / crunchy / fresh summer combo.",
+        "image_url": {
+          "href":"Pasta Salad.jpg",
+          "alt":"Pasta Salad"
+        }
+      },
+      {
+        "id":14,
+        "name": "Greek Pizza",
+        "typeid":3,
+        "vegan":false,
+        "categoryid": 1,
+        "price": {
+          "sm_price": 55
+        },
+        "description": "Greek-style pizza, especially popular in the New England states, features a thick and chewy crust cooked in shallow, oiled pans, resulting in a nearly deep-fried bottom.",
+        "image_url": {
+          "href":"Greek Pizza.jpg",
+          "alt":"Greek Pizza"
+        }
+      },
+      {
+        "id":15,
+        "name": "Pattypan Panzanella",
+        "categoryid": 4,
+        "typeid":2,
+        "vegan":false,
+        "price": {
+          "sm_price": 45,
+          "md_price": 55
+        },
+        "description": "The grilled squash is a great jammy contrast to crisp cucumbers and bursty cherry tomatoes.",
+        "image_url": {
+          "href":"Pattypan Panzanella.jpg",
+          "alt":"Pattypan Panzanella"
+        }
+      },
+      {
+        "id":16,
+        "name": "Soba",
+        "categoryid": 3,
+        "typeid":1,
+        "vegan":false,
+        "price": {
+          "sm_price": 45,
+          "md_price": 55,
+          "lg_price": 75
+        },
+        "description": "They earn their dark coloring from buckwheat flour. It has more protein and fiber than your average pasta.",
+        "image_url": {
+          "href":"Soba.jpg",
+          "alt":"Soba Noodles"
+        }
+      },
+      {
+        "id":17,
+        "name": "Heirloom Tomato Fattoush",
+        "categoryid": 4,
+        "typeid":2,
+        "vegan":true,
+        "price": {
+          "sm_price": 30
+        },
+        "description": "Non-traditional take on fattoush, a bread salad made with toasted pita. This one has a layer of lemony yogurt and is topped with crispy chickpeas",
+        "image_url": {
+          "href":"Heirloom Tomato Fattoush.jpg",
+          "alt":"Heirloom Tomato Fattoush"
+        }
+      },
+      {
+        "id":18,
+        "name": "Lo Mein and Chow Mein",
+        "categoryid": 3,
+        "typeid":3,
+        "vegan":false,
+        "price": {
+          "sm_price": 30,
+          "md_price": 60,
+          "lg_price": 90.99
+        },
+        "description": "The flavors of lo mein and chow mein noodles are perfect for hot stir-fries with garlic, sesame, and ginger. ",
+        "image_url": {
+          "href":"Lo Mein and Chow Mein.jpg",
+          "alt":"Lo Mein and Chow Mein"
+        }
+      },
+      {
+        "id":19,
+        "name": "Neapolitan Pizza",
+        "categoryid": 1,
+        "typeid":3,
+        "vegan":false,
+        "price": {
+          "sm_price": 70
+        },
+        "description": "Fresh mozzarella, tomatoes, basil leaves, oregano, and olive oil.",
+        "image_url": {
+          "href":"Neapolitan Pizza.jpg",
+          "alt":"Neapolitan Pizza"
+        }
+      },
+      {
+        "id":20,
+        "name": "Mediterranean Chickpea Salad",
+        "categoryid": 4,
+        "typeid":2,
+        "vegan":false,
+        "price": {
+          "sm_price": 40.99
+        },
+        "description": "Fresh from the mediterranean!",
+        "image_url": {
+          "href":"Mediterranean Chickpea Salad.jpg",
+          "alt":"Mediterranean Chickpea Salad"
+        }
+      },
+      {
+        "id":21,
+        "name": "St. Louis Pizza",
+        "categoryid": 1,
+        "typeid":3,
+        "vegan":false,
+        "price": {
+          "sm_price": 100
+        },
+        "description": "St. Louis pizza features a thin crust with a cracker-like consistency that is made without yeast.",
+        "image_url": {
+          "href":"St. Louis Pizza.jpg",
+          "alt":"St. Louis Pizza"
+        }
+      },
+      {
+        "id":22,
+        "name": "Eggplant & Roasted Tomato Farro Salad",
+        "categoryid": 4,
+        "typeid":1,
+        "vegan":false,
+        "price": {
+          "sm_price": 60
+        },
+        "description": "Roasting cherry tomatoes gives them an intense sweet & savory flavor that’s fantastic alongside eggplant, arugula, and nutty farro.",
+        "image_url": {
+          "href":"Eggplant & Roasted Tomato Farro Salad.jpg",
+          "alt":"Eggplant & Roasted Tomato Farro Salad"
+        }
+      },
+      {
+        "id":23,
+        "name": "Chicago Pizza",
+        "categoryid": 1,
+        "typeid":3,
+        "vegan":false,
+        "price": {
+          "sm_price": 90
+        },
+        "description": "Ground beef, sausage, pepperoni, onion, mushrooms, and green peppers, placed underneath the tomato sauce.",
+        "image_url": {
+          "href":"Chicago Pizza.jpg",
+          "alt":"Chicago Pizza"
+        }
+      },
+      {
+        "id":24,
+        "name": "Glass Noodles",
+        "categoryid": 3,
+        "typeid":2,
+        "vegan":false,
+        "price": {
+          "sm_price": 20,
+          "md_price": 35
+        },
+        "description": "These include mung bean, peas, or sweet potato, although mung bean is the most common.",
+        "image_url": {
+          "href":"Glass Noodles.jpg",
+          "alt":"Glass Noodles"
+        }
+      },
+      {
+        "id":25,
+        "name": "Ramen Noodles",
+        "categoryid": 3,
+        "typeid":3,
+        "vegan":true,
+        "price": {
+          "sm_price": 60,
+          "md_price": 80
+        },
+        "description": "Ramen noodles incorporate wheat flour, vegetable oils, and in some instances, extra flavoring.",
+        "image_url": {
+          "href":"Ramen Noodles.jpg",
+          "alt":"Ramen Noodles"
+        }
+      },
+      {
+        "id":26,
+        "name": "Chimichurri Potato Salad",
+        "categoryid": 4,
+        "typeid":2,
+        "vegan":true,
+        "price": {
+          "sm_price": 30.99,
+          "md_price": 55,
+          "lg_price":80
+        },
+        "description": "Potato salad in a tangy, herbaceous chimichurri instead of a creamy dressing. ",
+        "image_url": {
+          "href":"Chimichurri Potato Salad.jpg",
+          "alt":"Chimichurri Potato Salad"
+        }
+      }
+]
+  
+  

@@ -1,0 +1,18 @@
+[
+    {
+        "value": "price-asc",
+        "text": "Lowest price"
+    },
+    {
+        "value": "price-desc",
+        "text": "Highest price"
+    },
+    {
+        "value": "name-asc",
+        "text": "Name A-Z"
+    },
+    {
+        "value": "name-desc",
+        "text": "Name Z-A"
+    }
+]

@@ -1,0 +1,76 @@
+[
+    {
+        "name":{
+            "fName":"Jeniffer",
+            "lName":"Soft"
+            },
+        "image":{
+            "src":"Jeniffer Soft.jpg",
+            "alt":"Jennifer Soft"
+        },
+        "function":"Founder and CEO",
+        "about":"Jeniffer always wanted to open up her own bussiness, she never could have guessed it would be a restaurant, but nonetheless she's enjoying every moment of it!",
+        "socials":{
+            "facebook":true,
+            "twitter":true,
+            "instagram":true,
+            "youtube":false
+        }
+    },
+    {
+        "name":{
+            "fName":"Daisy",
+            "lName":"Walker"
+            },
+        "image":{
+                "src":"Daisy Walker.jpg",
+                "alt":"Daisy Walker"
+        },
+        "function":"Executive Chef",
+        "about":"This is our executive chef Daisy Walker, she made her first dish at the age of 13. Her famous quote is: &#34;I always say that I don't believe I'm a chef. I try to be a storyteller.&#34;",
+        "socials":{
+            "facebook":true,
+            "twitter":true,
+            "instagram":false,
+            "youtube":false
+        }
+    },
+    {
+        "name":{
+            "fName":"Florence",
+            "lName":"Nelson"
+            },
+        "image":{
+                "src":"Florence Nelson.jpg",
+                "alt":"Florence Nelson"
+        },
+        "function":"Kitchen Manager",
+        "about":"This is our kitchen manager Marco Daisy, she's the one in charge of getting us only the freshest ingredients making our food #1.",
+        "socials":{
+            "facebook":true,
+            "twitter":false,
+            "instagram":true,
+            "youtube":false
+        }
+    },
+    {
+        "name":{
+            "fName":"Valentina",
+            "lName":"Martin"
+            },
+        "image":{
+                "src":"Valentina Martin.jpg",
+                "alt":"Valentina Martin"
+        },
+        "function":"Culinary Director",
+        "about":"Valentina is responsible for coordinating all food service activities for residents, staff, and visitors, hands down one of the most imporant here.",
+        "socials":{
+            "facebook":true,
+            "twitter":true,
+            "instagram":true,
+            "youtube":true
+        }
+    }
+    
+
+]
