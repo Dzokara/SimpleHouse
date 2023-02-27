@@ -127,3 +127,7 @@ footer hr{
   border:1px solid #2F956D;
   border-radius:100px;
 }
+#our-menu{
+  width:100%;
+  display:flex;
+}
