@@ -120,7 +120,7 @@ function makeNav(data){
                     <span class="cart-count">0</span>
                 </div>`;
     for (let it of data) {
-        html+=`<li class="tm-nav-li"><a href="..${it.href}" class="tm-nav-link">${it.title}</a></li>`
+        html+=`<li class="tm-nav-li"><a href="${it.href}" class="tm-nav-link">${it.title}</a></li>`
     }
 
 	html+=`</ul>`;
@@ -148,7 +148,7 @@ function makeShop(data){
     for (let it of data) {
         html+=`  <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
                     <figure>
-                        <img src="../img/gallery/${it.image_url.href}" alt="${it.alt}" class="img-fluid tm-gallery-img" />
+                        <img src="img/gallery/${it.image_url.href}" alt="${it.alt}" class="img-fluid tm-gallery-img" />
                         <figcaption>
                             <h4 class="tm-gallery-title">${it.name}</h4>
                             <p class=tm-gallery-price>`;
