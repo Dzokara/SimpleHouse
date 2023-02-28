@@ -66,7 +66,7 @@
       },
       {
         "id":5,
-        "name": "Mexican Street Corn Salad",
+        "name": "Mexican Street Corn",
         "categoryid": 4,
         "typeid":2,
         "vegan":false,
@@ -114,7 +114,7 @@
       },
       {
         "id":9,
-        "name": "Cherry Tomato Couscous Salad",
+        "name": "Cherry Tomato Salad",
         "categoryid": 4,
         "typeid":1,
         "vegan":true,
@@ -171,7 +171,7 @@
           "sm_price": 10,
           "md_price": 20.15
         },
-        "description": "If it ain't broke, don't fix it.",
+        "description": "If it ain't broke, don't fix it, or however the saying goes... You get the point.",
         "image_url": {
           "href":"Classic Caprese Salad.jpg",
           "alt":"Classic Caprese Salad"
@@ -257,7 +257,7 @@
       },
       {
         "id":17,
-        "name": "Heirloom Tomato Fattoush",
+        "name": "Tomato Fattoush",
         "categoryid": 4,
         "typeid":2,
         "vegan":true,
@@ -304,14 +304,14 @@
       },
       {
         "id":20,
-        "name": "Mediterranean Chickpea Salad",
+        "name": "Mediterranean Chickpea",
         "categoryid": 4,
         "typeid":2,
         "vegan":false,
         "price": {
           "sm_price": 40.99
         },
-        "description": "Fresh from the mediterranean!",
+        "description": "Fresh from the mediterranean! Only the best for our customers.",
         "image_url": {
           "href":"Mediterranean Chickpea Salad.jpg",
           "alt":"Mediterranean Chickpea Salad"
@@ -334,7 +334,7 @@
       },
       {
         "id":22,
-        "name": "Eggplant & Roasted Tomato Farro Salad",
+        "name": "Eggplant Farro",
         "categoryid": 4,
         "typeid":1,
         "vegan":false,
@@ -396,7 +396,7 @@
       },
       {
         "id":26,
-        "name": "Chimichurri Potato Salad",
+        "name": "Chimichurri Potato",
         "categoryid": 4,
         "typeid":2,
         "vegan":true,

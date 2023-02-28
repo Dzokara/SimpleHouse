@@ -163,12 +163,13 @@ function makeShop(data){
         html+=it.vegan ? "Vegan, " : "";
         html+=getDishType(it.typeid,"dish_types");
         html+=`</p>
-        <p class="tm-gallery-description">${it.description}</p>
+        <p class="tm-gallery-description">${it.description.substr(0,50)}<a href="#" class="read-more" >...</a></p>
         <p class="tm-gallery-price">$` 
         html+=`${it.price.sm_price} `;
         html+=it.price.md_price==undefined ? "</p>" : `/ $${it.price.md_price} ` ;
         html+=it.price.lg_price==undefined ? "</p>" : `/ $${it.price.lg_price} </p> `;
-        html+=` <input type="button" value="Order now" class="tm-paging-link tm-mb-45 addToCartButtons"> </figcaption>
+        html+=`  </figcaption>
+                <input type="button" value="Order now" class="tm-paging-link tm-mb-45 addToCartButtons">
                 </figure>
             </article>`;
     }
