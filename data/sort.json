@@ -8,6 +8,10 @@
         "text": "Highest price"
     },
     {
+        "value":"popularity",
+        "text":"Popularity"
+    },
+    {
         "value": "name-asc",
         "text": "Name A-Z"
     },

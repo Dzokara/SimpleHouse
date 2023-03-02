@@ -350,6 +350,9 @@ function sort(data){
                     return 0;
                 }
             }
+            if(value=="popularity"){
+                return b.popularity - a.popularity;
+            }
         })
     return data;
     }
