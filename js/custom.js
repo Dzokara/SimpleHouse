@@ -46,6 +46,12 @@ window.onload=function(){
         $(document).on("click", ".addToCartButtons",function(){
             showNotification();
         });
+        $(document).on("click",".read-more",function(e){
+            e.preventDefault();
+            let products=getLS("products");
+            let id=$(this).data('id');
+            
+        });
     };
     
     if(window.location.href.indexOf("about.html")>-1){
@@ -163,7 +169,7 @@ function makeShop(data){
         html+=it.vegan ? "Vegan, " : "";
         html+=getDishType(it.typeid,"dish_types");
         html+=`</p>
-        <p class="tm-gallery-description">${it.description.substr(0,50)}<a href="#" class="read-more" >...</a></p>
+        <p class="tm-gallery-description">${it.description.substr(0,18)}<a href="#" class="read-more" data-id="${it.id}">...</a></p>
         <p class="tm-gallery-price">$` 
         html+=`${it.price.sm_price} `;
         html+=it.price.md_price==undefined ? "</p>" : `/ $${it.price.md_price} ` ;
@@ -254,13 +260,25 @@ function makeStaffDiv(data){
     $("#staff").html(html);
 }
 
+function fillModal(id){
+    let html="";
+    let products=getLS("products");
+    let i=id-1;
+    html+=` <div class="modal-content">
+                <span class="close">&times;</span>
+                <img src="img/gallery/${products[i].image_url.href}" alt="${products[i].image_url.alt}"/>
+                <h2>${products[i].name}</h2>
+                <p>${products[i].description}</p>
+            </div> `;
 
+    $("#modal").html(html);
+}
 window.addEventListener("load", function() {
     const loader = document.getElementById("preloader");
     setTimeout(() => {
         loader.style.display = "none";
         document.getElementById("preloader").style.display = "none";
-    }, 2000);
+    }, 1500);
     });
 
 $(document).ready(function() {
@@ -270,12 +288,28 @@ $(document).ready(function() {
       } else {
           $('#return-to-top').fadeOut();
       }
+      
   });
-
   $('#return-to-top').click(function() {
       $('html, body').animate({scrollTop : 0},800);
       return false;
   });
+      var modal = document.getElementById("modal");
+      var span = document.getElementsByClassName("close")[0];
+      $(document).on("click",".read-more",function(e){
+        e.preventDefault();
+        let id=$(this).data('id');
+        fillModal(id);
+        modal.style.display = "block";
+      });
+      $(document).on("click",".close",function(){
+        modal.style.display = "none";
+      });
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
 });
 
 function sort(data){
