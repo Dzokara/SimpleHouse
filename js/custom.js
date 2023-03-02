@@ -295,7 +295,6 @@ $(document).ready(function() {
       return false;
   });
       var modal = document.getElementById("modal");
-      var span = document.getElementsByClassName("close")[0];
       $(document).on("click",".read-more",function(e){
         e.preventDefault();
         let id=$(this).data('id');
