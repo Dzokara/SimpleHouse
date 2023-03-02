@@ -6,18 +6,8 @@ window.onload=function(){
     
     makeFooter();
 
-    // let cartIcon = document.getElementById("cart-icon");
-    // let sidebar = document.getElementById("sidebar");
-    // cartIcon.addEventListener("click", () => {
-    //     sidebar.style.display = "block";
-    // });
 
-    // sidebar.addEventListener("click", (event) => {
-    //     if (event.target === sidebar) {
-    //         sidebar.style.display = "none";
-    //     }
-    // });
-
+    //--index page
     if(window.location.href.indexOf("index.html")>-1|| window.location.href.endsWith("/")){
         getData("dish_types",function(data){
             makeDdl(data,"dishesSelect","filter","Dish types","dishes");
@@ -53,26 +43,103 @@ window.onload=function(){
             
         });
     };
-    
+
+
+    //--about page
     if(window.location.href.indexOf("about.html")>-1){
         getData("staff",function(data){
             makeStaffDiv(data);
         });
     };
+
+    //--contact page
     if(window.location.href.indexOf("contact.html")>-1){
         let date=document.getElementById("reservationDate");
-        let time=document.getElementById("reservationTime");
         let now=new Date();
         let year = now.getFullYear();
         let month = (now.getMonth() + 1).toString().padStart(2, "0");
-        let day = now.getDate().toString().padStart(2, "0");
+        let day = (now.getDate()+1).toString().padStart(2, "0");
         let currentDate = `${year}-${month}-${day}`;
         date.min=currentDate;
-        time.min="09:00";
-        time.max="21:00";
+
+        
+        $(document).on("change","#reservationTime",function(){
+            checkTime($(this).val(),$(this));
+        })
+
+        $(document).on("blur", "#tbName",function(){
+            reCheck(reName,$(this));
+        });
+        
+        $(document).on("blur", "#tbPhone",function(){
+            reCheck(rePhone,$(this));
+        });
+
+        $(document).on("blur", "#tbEmail",function(){
+            reCheck(reEmail,$(this));
+        });
+        $(document).on("change", "#reservationDate",function(){
+            checkDate($(this));
+        });
+        $(document).on("change", "#agreement",function(){
+            agreementCheck($(this),$("#agreementText"));
+        });
+        $(document).on("click","#btnSubmit",function(){
+            validateForm();
+        });
+
+
     };
 };
 
+
+
+reName=/^[A-ZŠĐŽČĆ][a-zšđčćž]{2,14}(\s[A-ZŠĐŽČĆ][a-zšđčćž]{2,14})+$/;
+reEmail=/^[a-z0-9\.]+@[a-z]+\.[a-z]{2,3}$/;
+rePhone=/^06\d{7,8}$/;
+
+
+
+window.addEventListener("load", function() {
+    const loader = document.getElementById("preloader");
+    setTimeout(() => {
+        loader.style.display = "none";
+        document.getElementById("preloader").style.display = "none";
+    }, 1500);
+    });
+
+$(document).ready(function() {
+  $(window).scroll(function() {
+      if ($(this).scrollTop() > 250) {
+          $('#return-to-top').fadeIn();
+      } else {
+          $('#return-to-top').fadeOut();
+      }
+      
+  });
+  $('#return-to-top').click(function() {
+      $('html, body').animate({scrollTop : 0},800);
+      return false;
+  });
+      var modal = document.getElementById("modal");
+      $(document).on("click",".read-more",function(e){
+        e.preventDefault();
+        let id=$(this).data('id');
+        fillModal(id);
+        modal.style.display = "block";
+      });
+      $(document).on("click",".close",function(){
+        modal.style.display = "none";
+      });
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+});
+
+
+// -- functions
 function getData(file,callback){
     $.ajax({
         url:"data/"+file+".json",
@@ -115,7 +182,12 @@ function makeFooter(){
     let html="";
     html+=`<p>&copy; 2023 All Rights Reserved By ICT College</p>
             <hr/>
-            <p class="tm-gallery-title"><a href="documentation.pdf">Documentation</a></p>`;
+            <p class="tm-gallery-title">Useful Links</p>
+            <div id="usefull-link">
+            <a href="rss.xml">RSS Sub</a>
+            <a href="documentation.pdf">Documentation</a>
+            <a href="author.html">Author</a>
+            </div>`;
     $("footer").html(html);
 }
 
@@ -130,7 +202,6 @@ function makeNav(data){
     }
 
 	html+=`</ul>`;
-    
     $("#navlinks").html(html);
 
     let currentPage=0;
@@ -196,22 +267,6 @@ function getDishType(id,data){
     return html;
 }
 
-// function makeFilterAndSortArea(data){
-//     let html="";
-//     for (let it of data) {
-//         html+=`<li id="${it.name.toLowerCase()}Btn" class="tm-paging-item"><button type="button" class="tm-paging-link">${it.name}</button></li>`
-//     }
-//     html+=`<select name="ddlSort" id="ddlSort">
-    
-//     </select>`
-//     $("#filters").html(html);
-   
-// }
-//<li id="dropdown-button" class="tm-paging-item">
-//            <a href="#" class="tm-paging-link">Sort By &#8595</a>
-//        <div class="dropdown-content">
-//        </div>
-//    </li>
 function makeDdl(data,id,type,defaultVal,divId){
     let html = `
     <select class="tm-paging-item" id="${id}">
@@ -273,43 +328,6 @@ function fillModal(id){
 
     $("#modal").html(html);
 }
-window.addEventListener("load", function() {
-    const loader = document.getElementById("preloader");
-    setTimeout(() => {
-        loader.style.display = "none";
-        document.getElementById("preloader").style.display = "none";
-    }, 1500);
-    });
-
-$(document).ready(function() {
-  $(window).scroll(function() {
-      if ($(this).scrollTop() > 250) {
-          $('#return-to-top').fadeIn();
-      } else {
-          $('#return-to-top').fadeOut();
-      }
-      
-  });
-  $('#return-to-top').click(function() {
-      $('html, body').animate({scrollTop : 0},800);
-      return false;
-  });
-      var modal = document.getElementById("modal");
-      $(document).on("click",".read-more",function(e){
-        e.preventDefault();
-        let id=$(this).data('id');
-        fillModal(id);
-        modal.style.display = "block";
-      });
-      $(document).on("click",".close",function(){
-        modal.style.display = "none";
-      });
-      window.onclick = function(event) {
-        if (event.target == modal) {
-          modal.style.display = "none";
-        }
-      }
-});
 
 function sort(data){
     value=document.getElementById("sortSelect").value;
@@ -394,4 +412,81 @@ function filterSync(){
     sort(products);
 
     makeShop(products);
+}
+
+function addBorder(obj){
+    obj.next('span').removeClass("d-none");
+    obj.addClass("border-danger");
+    return false;
+}
+function removeBorder(obj){
+    obj.next('span').addClass("d-none");
+    obj.removeClass("border-danger");
+    return true;
+}
+
+
+function reCheck(re,obj){
+    if(!re.test(obj.val())){
+      return addBorder(obj)
+  }
+    else{
+        return removeBorder(obj);
+    }
+}
+
+
+function checkTime(value,obj){
+    let min="10:00";
+    let max="22:00";
+    if(value>min && value<max){
+        return removeBorder(obj);
+    }
+    else{
+        return addBorder(obj);
+    }
+}
+
+function agreementCheck(obj,label){
+    if(obj.is(":checked")){
+        label.removeClass("alert");
+        return true;
+    }
+    else{
+        label.addClass("alert");
+        return false;
+    }
+}
+
+function checkDate(obj){
+    if(obj.val()==""){
+        return addBorder(obj);
+    }
+    else{
+        return removeBorder(obj);
+    }
+}
+
+function validateForm(){
+
+    let tbName=$("#tbName");
+    let tbPhone=$("#tbPhone");
+    let tbEmail=$("#tbEmail");
+    let date=$("#reservationDate");
+    let time=$("#reservationTime");
+    let chb=$("#agreement");
+    let brGresaka=0;
+    !reCheck(reName,tbName) ? brGresaka++ : "";
+    !reCheck(rePhone,tbPhone) ? brGresaka++ : "";
+    !reCheck(reEmail,tbEmail) ? brGresaka++ : "";
+    !checkTime($(time).val(),time) ? brGresaka++ : "";
+    !checkDate(date) ? brGresaka++ : "";
+    !agreementCheck(chb,$("#agreementText")) ? brGresaka++ : "";
+    if(brGresaka==0){
+        document.getElementById("contactForm").reset();
+        document.getElementById("success").classList.remove("d-none");
+        setTimeout(function timer(){
+            document.getElementById("success").classList.add("d-none");
+        },3000);
+    }
 }

@@ -48,40 +48,46 @@
 			<div class="tm-container-inner-2 tm-contact-section">
 				<div class="row">
 					<div class="col-md-6">
-						<form action="" method="POST" class="tm-contact-form">
+						<form action="" method="POST" id="contactForm" class="tm-contact-form">
 
 					        <div class="form-group">
-					          <input type="text" name="name" class="form-control" placeholder="Name"/>
+					          <input type="text" id="tbName" name="name" class="form-control" placeholder="Name: John Doe"/>
+							  <span class="alert d-none">Name doesn't fit the format: Name Surname</span>
 					        </div>
 					        
 							<div class="form-group">
-								<input type="text" name="phone" class="form-control" placeholder="Phone"/>
+								<input type="text" id="tbPhone" name="phone" class="form-control" placeholder="Phone: 0621234567"/>
+								<span class="alert d-none">Number doesn't fit the format: 0621234567</span>
 							  </div>
 
 					        <div class="form-group">
-					          <input type="email" name="email" class="form-control" placeholder="Email"/>
+					          <input type="email" id="tbEmail" name="email" class="form-control" placeholder="Email: exam@mail.com"/>
+							  <span class="alert d-none">Email doesn't fit the format: exam@mail.com</span>
 					        </div>
 
 							<div class="form-group">
 								<input type="date" class="form-control" id="reservationDate" name="reservationDate">
+								<span class="alert d-none">You need to select a date!</span>
 							</div>
 
 							<div class="form-group">
-								<input type="time" class="form-control" id="reservationTime" name="reservationTime">
+								<input type="time" step="any" class="form-control" id="reservationTime" name="reservationTime">
+								<span class="alert d-none">Your selected time doesn't fit 10:00-22:00!</span>
 							</div>
 
 							<div class="form-group">
-								<input type="checkbox" id="agreement"><label for="agreement">I agree with the storage handling of my data.</label>
+								<input type="checkbox" id="agreement"><span id="agreementText">I agree with the storage handling of my data.</span>
 							</div>
 							
 					        <div class="form-group">
-					          <textarea rows="3" name="message" class="form-control" placeholder="Message"></textarea>
+					          <textarea rows="3" name="message" id="information" class="form-control" placeholder="Optional information.."></textarea>
 					        </div>
 					
 					        <div class="form-group tm-d-flex">
-					          <button type="button" class="tm-btn tm-btn-success tm-btn-right">
+					          <button type="button" id="btnSubmit" class="tm-btn tm-btn-success tm-btn-right">
 					            Send
 					          </button>
+							  <span id="success" class="d-none tm-text-success">Your reservation was successfull!</span>
 					        </div>
 						</form>
 					</div>
@@ -91,6 +97,9 @@
 							<address>
 								Our restaurant is located in Zdravka Čelara 16, Belgrade 11000
 							</address>
+							<h4 class="tm-info-title tm-text-success">Open Hours</h4>
+							<p class="tm-mb-45 tm-gallery-title">10:00 - 22:00</p>
+							<h4 class="tm-info-title tm-text-success">Contact us</h4>
 							<a href="tel:0621234567" class="tm-contact-link">
 								<i class="fas fa-phone tm-contact-icon"></i>0621234567
 							</a>
