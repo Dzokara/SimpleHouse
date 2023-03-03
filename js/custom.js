@@ -6,6 +6,29 @@ window.onload=function(){
     
     makeFooter();
 
+    //-- sidebar
+    var sidebar=document.getElementById("sidebar-container");
+    $(document).on("click","#cart-icon",function(){
+        
+        if(sidebar.classList.contains("d-none")){
+            sidebar.classList.remove("d-none");
+            
+        }
+        else{
+            sidebar.classList.add("d-none");
+        }
+       
+    });
+
+    window.addEventListener("click",function(event){
+        if (event.target==sidebar) {
+            sidebar.classList.add("d-none");
+        }
+    });
+    
+    $(document).on("click",".close-sidebar",function(){
+        sidebar.classList.add("d-none");
+    });
 
     //--index page
     if(window.location.href.indexOf("index.html")>-1|| window.location.href.endsWith("/")){
@@ -36,6 +59,7 @@ window.onload=function(){
         $(document).on("click", ".addToCartButtons",function(){
             showNotification();
             addToCart((this).getAttribute("data-id"));
+            updateProductNumber();
         });
     };
 
@@ -116,7 +140,7 @@ $(document).ready(function() {
         fillModal(id);
         modal.style.display = "block";
       });
-      $(document).on("click",".close",function(){
+      $(document).on("click",".close-modal",function(){
         modal.style.display = "none";
       });
       window.onclick = function(event) {
@@ -157,8 +181,6 @@ function getData(file,callback){
     });
 }
 
-
-
 function showNotification() {
     var notification = document.getElementById("notification");
     notification.style.display = "block";
@@ -167,18 +189,59 @@ function showNotification() {
     }, 3000); 
   }
 
-var ordered = [];
+
 function addToCart(id){
-    let allProducts = getLS("products");
+
+    var ordered=[];
+   
+    if(getLS("cart")!=null){
+        ordered=getLS("cart");
+        if(alreadyInCart()){
+            updateQty();
+        }
+        else{
+            ordered.push({
+                id:id,
+                qty:1
+            }); 
+        }
+    }
+    else{
+        ordered.push({
+            id:id,
+            qty:1
+        });
+    }
     
-    ordered.push({
-        id:id,
-        qty:1
-    }); 
+
+    function alreadyInCart(){
+        return ordered.find(el=>el.id==id);
+    }
+
+    function updateQty(){
+        for (let p of ordered) {
+            if(p.id==id){
+                p.qty++;
+                break;
+            }
+        }
+    }
 
     saveLS("cart",ordered);
 }
 
+function updateProductNumber(){
+
+    let count=0;
+    var ordered=getLS("cart");
+
+    for(let p of ordered)
+    {
+        count+=p.qty;
+    }
+
+    document.getElementsByClassName("cart-count")[0].innerHTML= count;
+}
 
 function isButtonClicked(){
     btn=document.getElementById("veganBtn");
@@ -213,8 +276,8 @@ function makeFooter(){
 
 function makeNav(data){
     let html=`<ul class="tm-nav-ul"> 
-                <div class="cart-icon">
-                    <i id="cart-icon" class="fa fa-shopping-cart"></i>
+                <div id="cart-icon" class="cart-icon">
+                    <i class="fa fa-shopping-cart"></i>
                     <span class="cart-count">0</span>
                 </div>`;
     for (let it of data) {
@@ -345,7 +408,7 @@ function fillModal(id){
     let products=getLS("products");
     let i=id-1;
     html+=` <div class="modal-content">
-                <span class="close">&times;</span>
+                <span class="close-modal">&times;</span>
                 <img src="img/gallery/${products[i].image_url.href}" alt="${products[i].image_url.alt}"/>
                 <h2>${products[i].name}</h2>
                 <p>${products[i].description}</p>
