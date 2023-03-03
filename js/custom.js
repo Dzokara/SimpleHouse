@@ -170,7 +170,12 @@ function showNotification() {
 var ordered = [];
 function addToCart(id){
     let allProducts = getLS("products");
-    ordered.push(allProducts[id-1]); 
+    
+    ordered.push({
+        id:id,
+        qty:1
+    }); 
+
     saveLS("cart",ordered);
 }
 
