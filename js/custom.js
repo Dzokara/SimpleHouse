@@ -2,15 +2,20 @@
 window.onload=function(){
     getData("navigation",function(data){
         makeNav(data);
+        updateProductNumber();
     });
     
     makeFooter();
 
-    //-- sidebar
+    //-- cart sidebar
     var sidebar=document.getElementById("sidebar-container");
+
     $(document).on("click","#cart-icon",function(){
         
         if(sidebar.classList.contains("d-none")){
+
+            fillSidebar();
+
             sidebar.classList.remove("d-none");
             
         }
@@ -19,7 +24,6 @@ window.onload=function(){
         }
        
     });
-
     window.addEventListener("click",function(event){
         if (event.target==sidebar) {
             sidebar.classList.add("d-none");
@@ -196,6 +200,7 @@ function addToCart(id){
    
     if(getLS("cart")!=null){
         ordered=getLS("cart");
+        updateProductNumber();
         if(alreadyInCart()){
             updateQty();
         }
@@ -204,6 +209,7 @@ function addToCart(id){
                 id:id,
                 qty:1
             }); 
+            updateProductNumber();
         }
     }
     else{
@@ -211,6 +217,7 @@ function addToCart(id){
             id:id,
             qty:1
         });
+        updateProductNumber();
     }
     
 
@@ -234,12 +241,15 @@ function updateProductNumber(){
 
     let count=0;
     var ordered=getLS("cart");
-
-    for(let p of ordered)
+    if(ordered==null){
+        count=0;
+    }
+    else{
+        for(let p of ordered)
     {
         count+=p.qty;
     }
-
+    }
     document.getElementsByClassName("cart-count")[0].innerHTML= count;
 }
 
@@ -415,6 +425,44 @@ function fillModal(id){
             </div> `;
 
     $("#modal").html(html);
+}
+
+function fillSidebar(){
+
+    let ordered=getLS("cart");
+    let html="";
+    if(ordered==null){
+        html="Your cart is empty...";
+    }
+    else{
+        html+="<h2>Your orders</h2>";
+        ordered=getProductsForCart()
+        for (let p of ordered) {
+            html+=`
+            <div class="col-lg-6">
+                <img src="img/gallery/${p.image_url.href}" alt="${p.image_url.alt}"/>
+                <h2>${p.name}</h2>
+                <p>${p.qty}</p>
+            </div>
+                    `;
+        }
+    }
+    $("#ordered-items").html(html);
+}
+
+function getProductsForCart(){
+    let ordered=getLS("cart");
+    let products=getLS("products")
+    let orderedProducts = products.filter(el => {
+        for(let o of ordered){
+            if(el.id == o.id){
+                el.qty = o.qty;
+                return true;
+            }
+        }
+        return false;
+    })
+    return orderedProducts;
 }
 
 function sort(data){
