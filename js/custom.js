@@ -35,6 +35,7 @@ window.onload=function(){
         });
         $(document).on("click", ".addToCartButtons",function(){
             showNotification();
+            addToCart((this).getAttribute("data-id"));
         });
     };
 
@@ -165,7 +166,14 @@ function showNotification() {
       notification.style.display = "none";
     }, 3000); 
   }
-  
+
+var ordered = [];
+function addToCart(id){
+    let allProducts = getLS("products");
+    ordered.push(allProducts[id-1]); 
+    saveLS("cart",ordered);
+}
+
 
 function isButtonClicked(){
     btn=document.getElementById("veganBtn");
@@ -253,7 +261,7 @@ function makeShop(data){
         html+=it.price.md_price==undefined ? "</p>" : `/ $${it.price.md_price} ` ;
         html+=it.price.lg_price==undefined ? "</p>" : `/ $${it.price.lg_price} </p> `;
         html+=`  </figcaption>
-                <input type="button" value="Order now" class="tm-paging-link tm-mb-45 addToCartButtons">
+                <input type="button" value="Order now" class="tm-paging-link tm-mb-45 addToCartButtons" data-id="${it.id}">
                 </figure>
             </article>`;
     }
