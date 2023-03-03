@@ -36,12 +36,6 @@ window.onload=function(){
         $(document).on("click", ".addToCartButtons",function(){
             showNotification();
         });
-        $(document).on("click",".read-more",function(e){
-            e.preventDefault();
-            let products=getLS("products");
-            let id=$(this).data('id');
-            
-        });
     };
 
 
