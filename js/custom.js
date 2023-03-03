@@ -93,13 +93,6 @@ window.onload=function(){
 };
 
 
-
-reName=/^[A-ZŠĐŽČĆ][a-zšđčćž]{2,14}(\s[A-ZŠĐŽČĆ][a-zšđčćž]{2,14})+$/;
-reEmail=/^[a-z0-9\.]+@[a-z]+\.[a-z]{2,3}$/;
-rePhone=/^06\d{7,8}$/;
-
-
-
 window.addEventListener("load", function() {
     const loader = document.getElementById("preloader");
     setTimeout(() => {
@@ -146,11 +139,31 @@ function getData(file,callback){
         method:"get",
         dataType:"json",
         success:callback,
-        error:function(xhr){
-            console.log(xhr);
+        error:function(jqXHR, exception){
+            var msg = '';
+            if (jqXHR.status === 0) {
+            msg = 'Not connecteded.\n Verify Network.';
+            } else if (jqXHR.status == 404) {
+            msg = 'Requested page not found. [404]';
+            } else if (jqXHR.status == 500) {
+            msg = 'Internal Server Error [500].';
+            } else if (exception === 'parsererror') {
+            msg = 'Requested JSON parse failed.';
+            } else if (exception === 'timeout') {
+            msg = 'Time out error.';
+            } else if (exception === 'abort') {
+            msg = 'Ajax request aborted.';
+            } else {
+            msg = 'Uncaught Error.\n' + jqXHR.responseText;
+            }
+            $("main").addClass("json-error");
+            $("main").html(msg);
         }
     });
 }
+
+
+
 function showNotification() {
     var notification = document.getElementById("notification");
     notification.style.display = "block";
@@ -280,9 +293,12 @@ function makeDdl(data,id,type,defaultVal,divId){
             }
         }
     html += `</select>`;
-
-document.querySelector(`#${divId}`).innerHTML = html;
+    if(document.querySelector(`#${divId}`)){
+        document.querySelector(`#${divId}`).innerHTML = html;
+    }
 }
+
+
 function socialsCheck(social,className,link){
     let html="";
 
@@ -290,6 +306,8 @@ function socialsCheck(social,className,link){
 
     return html;
 }
+
+
 function makeStaffDiv(data){
     let html="";
     for (let it of data) {
@@ -413,6 +431,11 @@ function filterSync(){
 
     makeShop(products);
 }
+
+
+reName=/^[A-ZŠĐŽČĆ][a-zšđčćž]{2,14}(\s[A-ZŠĐŽČĆ][a-zšđčćž]{2,14})+$/;
+reEmail=/^[a-z0-9\.]+@[a-z]+\.[a-z]{2,3}$/;
+rePhone=/^06\d{7,8}$/;
 
 function addBorder(obj){
     obj.next('span').removeClass("d-none");
