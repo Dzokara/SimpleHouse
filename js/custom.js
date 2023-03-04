@@ -15,7 +15,7 @@ window.onload=function(){
         if(sidebar.classList.contains("d-none")){
 
             fillSidebar();
-
+            
             sidebar.classList.remove("d-none");
             
         }
@@ -40,6 +40,10 @@ window.onload=function(){
         sidebar.classList.add("d-none");
     });
 
+    $(document).on("change","[name='sm-qty']",function(){
+        calculateTotal();
+    });
+    
     //--index page
     if(window.location.href.indexOf("index.html")>-1|| window.location.href.endsWith("/")){
         getData("dish_types",function(data){
@@ -458,15 +462,19 @@ function fillSidebar(){
             <div class="col-12 sidebar-content">
                 <img class="img-fluid" src="img/gallery/${p.image_url.href}" alt="${p.image_url.alt}"/>
                 <h3>${p.name}</h3>
-                <div class="cart-qty"><p>Small: <span class="green">$${p.price.sm_price}</span></p><input name="sm-qty" class="form-control" min="0" type="number" value="${p.qty}"></div>
-                <div class="cart-qty"><p>Medium: </p><input name="md-qty" class="form-control" type="number" min="0" value="0"></div>
-                <div class="cart-qty"><p>Large: </p><input name="lg-qty" class="form-control" type="number" min="0" value="0"></div>
-                <span class="remove-order" data-id="${p.id}">&times;</span>
+                <div class="cart-qty"><p>Small: <span class="green">$${p.price.sm_price}</span></p><input name="sm-qty" class="form-control" min="0" type="number" value="${p.qty}"></div>`
+
+            html+=checkIfPriceExists(p.id,"md_price") ? `<div class="cart-qty"><p>Medium: </p><input name="md-qty" class="form-control" type="number" min="0" value="0"></div>` : "";
+
+            html+= checkIfPriceExists(p.id,"lg_price") ? `<div class="cart-qty"><p>Large: </p><input name="lg-qty" class="form-control" type="number" min="0" value="0"></div>` : "";
+
+            html+=`<span class="remove-order" data-id="${p.id}">&times;</span>
             </div>
                     `;
         }
     }
     $("#ordered-items").html(html);
+    calculateTotal();
 }
 
 function getProductsForCart(){
@@ -482,6 +490,41 @@ function getProductsForCart(){
         return false;
     })
     return orderedProducts;
+}
+
+function calculateTotal(){
+    let ordered=getProductsForCart();
+    let total=0;
+    let i=0;
+    let inputArray=document.getElementsByName("sm-qty");
+    for(let p of ordered){
+        total+=p.price.sm_price*inputArray[i].value;
+        i++;
+    }
+    html=`<h2 class="green">$${total}</h2>`;
+    $("#total").html(html);
+}
+
+function checkIfPriceExists(id,propName){
+    let ordered=getProductsForCart();
+    let p=ordered.find(el=>el.id==id);
+    if(propName=="lg_price"){
+        if (p.price.lg_price) {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    if(propName="md_price"){
+        if (p.price.md_price) {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
 }
 
 function sort(data){
