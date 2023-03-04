@@ -202,7 +202,7 @@ footer hr{
   color:red;
 }
 .d-none{
-  display:none;
+  display:none!important;
 }
 .d-block{
   display:block;
@@ -247,6 +247,17 @@ footer hr{
 }
 .green{
   color:#2F956D;
+}
+#total{
+  border-top:1px solid gray;
+  padding-top:20px;
+  display:flex;
+  width:100%;
+  justify-content: space-between;
+}
+#orderButton{
+  padding:15px 50px;
+  border-radius: 2px;
 }
 #success{
   margin:15px 0px;

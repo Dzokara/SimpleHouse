@@ -528,7 +528,7 @@ function calculateTotal(){
         total+=p.price.sm_price*inputSm[is].value;
         is++;
     }
-    html=`<h2 class="green">$${parseFloat(total.toFixed(2))}</h2>`;
+    html=`<h2>Your total: <span class="green">$${parseFloat(total.toFixed(2))}</span></h2><input type="button" id="orderButton" class="tm-btn tm-btn-success" value="Order!"/>`;
     $("#total").html(html);
 }
 
