@@ -29,6 +29,12 @@ window.onload=function(){
             sidebar.classList.add("d-none");
         }
     });
+    $(document).on("click",".remove-order",function(){
+        id=$(this).data('id');
+        removeItem(id);
+        fillSidebar();
+        
+    });
     
     $(document).on("click",".close-sidebar",function(){
         sidebar.classList.add("d-none");
@@ -253,6 +259,14 @@ function updateProductNumber(){
     document.getElementsByClassName("cart-count")[0].innerHTML= count;
 }
 
+function removeItem(id){
+    let ordered=getLS("cart");
+
+    let newArray=ordered.filter(el=>el.id!=id);
+    
+    saveLS("cart",newArray);
+}
+
 function isButtonClicked(){
     btn=document.getElementById("veganBtn");
     if (btn.classList.contains("clicked")) {
@@ -431,18 +445,23 @@ function fillSidebar(){
 
     let ordered=getLS("cart");
     let html="";
-    if(ordered==null){
-        html="Your cart is empty...";
+    if(ordered==null || ordered.length==0){
+        html=`<h2 id="empty-cart" class="text-center tm-section-title">Your cart is empty...</h2>`;
     }
     else{
-        html+="<h2>Your orders</h2>";
-        ordered=getProductsForCart()
+        ordered=getProductsForCart();
+        html+=`<h2 class="tm-mb-45">Your orders </h2>
+                `
+
         for (let p of ordered) {
             html+=`
-            <div class="col-lg-6">
-                <img src="img/gallery/${p.image_url.href}" alt="${p.image_url.alt}"/>
-                <h2>${p.name}</h2>
-                <p>${p.qty}</p>
+            <div class="col-12 sidebar-content">
+                <img class="img-fluid" src="img/gallery/${p.image_url.href}" alt="${p.image_url.alt}"/>
+                <h3>${p.name}</h3>
+                <div class="cart-qty"><p>Small: <span class="green">$${p.price.sm_price}</span></p><input name="sm-qty" class="form-control" min="0" type="number" value="${p.qty}"></div>
+                <div class="cart-qty"><p>Medium: </p><input name="md-qty" class="form-control" type="number" min="0" value="0"></div>
+                <div class="cart-qty"><p>Large: </p><input name="lg-qty" class="form-control" type="number" min="0" value="0"></div>
+                <span class="remove-order" data-id="${p.id}">&times;</span>
             </div>
                     `;
         }

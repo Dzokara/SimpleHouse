@@ -185,15 +185,15 @@ footer hr{
   max-width: 500px;
 }
 
-.close-sidebar,.close-modal {
+.close-sidebar,.close-modal,.remove-order {
   color: #aaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
 }
 
-.close-sidebar:hover,.close-modal:hover,
-.close-sidebar:focus,.close-modal:focus{
+.close-sidebar:hover,.close-modal:hover,.remove-order:hover,
+.close-sidebar:focus,.close-modal:focus,.remove-order:focus{
   color: black;
   text-decoration: none;
   cursor: pointer;
@@ -210,6 +210,40 @@ footer hr{
 
 .border-danger{
   border:1px solid red;
+}
+
+.sidebar-content{
+  display:flex;
+  flex-direction: column;
+  height:100%;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom:30px;
+  padding-top:5px;
+  border-top:1px solid gray;
+}
+.sidebar-content img{
+  width:25%;
+  border-radius:3px;
+}
+#empty-cart{
+  margin-top:50px;
+}
+.cart-qty{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width:50%;
+}
+.cart-qty input[type=number]{
+  width: 15%;
+  padding:0px;
+}
+.cart-qty p{
+  width:35%;
+}
+.green{
+  color:#2F956D;
 }
 #success{
   margin:15px 0px;
