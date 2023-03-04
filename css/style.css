@@ -233,7 +233,10 @@ footer hr{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width:50%;
+  width:100%;
+}
+.cart-qty p{
+  width:100%;
 }
 .cart-qty input[type=number]{
   width: 15%;

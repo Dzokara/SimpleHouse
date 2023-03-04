@@ -32,15 +32,16 @@ window.onload=function(){
     $(document).on("click",".remove-order",function(){
         id=$(this).data('id');
         removeItem(id);
+        calculateTotal();
+        updateProductNumber();
         fillSidebar();
-        
     });
     
     $(document).on("click",".close-sidebar",function(){
         sidebar.classList.add("d-none");
     });
 
-    $(document).on("change","[name='sm-qty']",function(){
+    $(document).on("change",`.sidebar-content input[type="number"]`,function(){
         calculateTotal();
     });
     
@@ -449,8 +450,10 @@ function fillSidebar(){
 
     let ordered=getLS("cart");
     let html="";
+    var empty=false;
     if(ordered==null || ordered.length==0){
         html=`<h2 id="empty-cart" class="text-center tm-section-title">Your cart is empty...</h2>`;
+        empty=true;
     }
     else{
         ordered=getProductsForCart();
@@ -459,14 +462,14 @@ function fillSidebar(){
 
         for (let p of ordered) {
             html+=`
-            <div class="col-12 sidebar-content">
+            <div class="sidebar-content">
                 <img class="img-fluid" src="img/gallery/${p.image_url.href}" alt="${p.image_url.alt}"/>
                 <h3>${p.name}</h3>
                 <div class="cart-qty"><p>Small: <span class="green">$${p.price.sm_price}</span></p><input name="sm-qty" class="form-control" min="0" type="number" value="${p.qty}"></div>`
 
-            html+=checkIfPriceExists(p.id,"md_price") ? `<div class="cart-qty"><p>Medium: </p><input name="md-qty" class="form-control" type="number" min="0" value="0"></div>` : "";
+            html+=checkIfPriceExists(p.id,"md_price") ? `<div class="cart-qty"><p>Medium: <span class="green">$${p.price.md_price}</span></p><input name="md-qty" class="form-control" type="number" min="0" value="0"></div>` : "";
 
-            html+= checkIfPriceExists(p.id,"lg_price") ? `<div class="cart-qty"><p>Large: </p><input name="lg-qty" class="form-control" type="number" min="0" value="0"></div>` : "";
+            html+= checkIfPriceExists(p.id,"lg_price") ? `<div class="cart-qty"><p>Large: <span class="green">$${p.price.lg_price}</span></p><input name="lg-qty" class="form-control" type="number" min="0" value="0"></div>` : "";
 
             html+=`<span class="remove-order" data-id="${p.id}">&times;</span>
             </div>
@@ -474,12 +477,22 @@ function fillSidebar(){
         }
     }
     $("#ordered-items").html(html);
-    calculateTotal();
+    if(!empty)
+    {
+        $("#total").removeClass("d-none");
+        calculateTotal();
+    }
+    else{
+        $("#total").addClass("d-none");
+    }
 }
 
 function getProductsForCart(){
     let ordered=getLS("cart");
-    let products=getLS("products")
+    let products=getLS("products");
+    if(ordered==null || ordered.length == 0 ){
+        return [];
+    }
     let orderedProducts = products.filter(el => {
         for(let o of ordered){
             if(el.id == o.id){
@@ -495,13 +508,27 @@ function getProductsForCart(){
 function calculateTotal(){
     let ordered=getProductsForCart();
     let total=0;
-    let i=0;
-    let inputArray=document.getElementsByName("sm-qty");
+    let is=0;
+    let im=0;
+    let il=0;
+    let inputSm=document.getElementsByName("sm-qty");
+    let inputMd=document.getElementsByName("md-qty");
+    let inputLg=document.getElementsByName("lg-qty");
     for(let p of ordered){
-        total+=p.price.sm_price*inputArray[i].value;
-        i++;
+
+        if(checkIfPriceExists(p.id,"md_price")){
+            total+=p.price.md_price*inputMd[im].value;
+            im++;
+        }
+
+        if(checkIfPriceExists(p.id,"lg_price")){
+            total+=p.price.lg_price*inputLg[il].value;
+            il++;
+        }
+        total+=p.price.sm_price*inputSm[is].value;
+        is++;
     }
-    html=`<h2 class="green">$${total}</h2>`;
+    html=`<h2 class="green">$${parseFloat(total.toFixed(2))}</h2>`;
     $("#total").html(html);
 }
 
