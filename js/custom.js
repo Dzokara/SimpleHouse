@@ -118,7 +118,11 @@ window.onload=function(){
             saveLS("dish_types",data);
         });
         getData("products",function(data){
-            makeShop(data);
+            
+            setTimeout(function timer(){
+                makeShop(data);
+            },0);
+            
             saveLS("products",data);
         });
         
