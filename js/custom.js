@@ -31,9 +31,13 @@ window.onload=function(){
     });
     $(document).on("click",".remove-order",function(){
         id=$(this).data('id');
+
         removeItem(id);
+
         calculateTotal();
+
         updateProductNumber();
+
         fillSidebar();
     });
     
@@ -43,6 +47,29 @@ window.onload=function(){
 
     $(document).on("change",`.sidebar-content input[type="number"]`,function(){
         calculateTotal();
+
+        let cartArray=getLS("cart");
+
+        let input=(this).getAttribute("name");
+        let id=(this).dataset.id;
+        let val=parseInt((this).value);
+        cartArray.forEach((el)=>{
+            if(el.id==id){
+                if(input=="md-qty"){
+                    el.mdQty=val;
+                }
+                if(input=="lg-qty"){
+                    el.lgQty=val;
+                }
+                if(input=="sm-qty"){
+                    el.qty=val;
+                }
+            }
+        });
+        
+        saveLS("cart",cartArray);
+
+        updateProductNumber();
     });
     
     //--index page
@@ -196,81 +223,6 @@ function getData(file,callback){
     });
 }
 
-function showNotification() {
-    var notification = document.getElementById("notification");
-    notification.style.display = "block";
-    setTimeout(function() {
-      notification.style.display = "none";
-    }, 3000); 
-  }
-
-
-function addToCart(id){
-
-    var ordered=[];
-   
-    if(getLS("cart")!=null){
-        ordered=getLS("cart");
-        updateProductNumber();
-        if(alreadyInCart()){
-            updateQty();
-        }
-        else{
-            ordered.push({
-                id:id,
-                qty:1
-            }); 
-            updateProductNumber();
-        }
-    }
-    else{
-        ordered.push({
-            id:id,
-            qty:1
-        });
-        updateProductNumber();
-    }
-    
-
-    function alreadyInCart(){
-        return ordered.find(el=>el.id==id);
-    }
-
-    function updateQty(){
-        for (let p of ordered) {
-            if(p.id==id){
-                p.qty++;
-                break;
-            }
-        }
-    }
-
-    saveLS("cart",ordered);
-}
-
-function updateProductNumber(){
-
-    let count=0;
-    var ordered=getLS("cart");
-    if(ordered==null){
-        count=0;
-    }
-    else{
-        for(let p of ordered)
-    {
-        count+=p.qty;
-    }
-    }
-    document.getElementsByClassName("cart-count")[0].innerHTML= count;
-}
-
-function removeItem(id){
-    let ordered=getLS("cart");
-
-    let newArray=ordered.filter(el=>el.id!=id);
-    
-    saveLS("cart",newArray);
-}
 
 function isButtonClicked(){
     btn=document.getElementById("veganBtn");
@@ -465,11 +417,11 @@ function fillSidebar(){
             <div class="sidebar-content">
                 <img class="img-fluid" src="img/gallery/${p.image_url.href}" alt="${p.image_url.alt}"/>
                 <h3>${p.name}</h3>
-                <div class="cart-qty"><p>Small: <span class="green">$${p.price.sm_price}</span></p><input name="sm-qty" class="form-control" min="0" type="number" value="${p.qty}"></div>`
+                <div class="cart-qty"><p>Small: <span class="green">$${p.price.sm_price}</span></p><input name="sm-qty" class="form-control" min="0" type="number" value="${p.qty}" data-id="${p.id}"></div>`
 
-            html+=checkIfPriceExists(p.id,"md_price") ? `<div class="cart-qty"><p>Medium: <span class="green">$${p.price.md_price}</span></p><input name="md-qty" class="form-control" type="number" min="0" value="0"></div>` : "";
+            html+=checkIfPriceExists(p.id,"md_price") ? `<div class="cart-qty"><p>Medium: <span class="green">$${p.price.md_price}</span></p><input name="md-qty" class="form-control" type="number" min="0" value="${p.mdQty}" data-id="${p.id}"></div>` : "";
 
-            html+= checkIfPriceExists(p.id,"lg_price") ? `<div class="cart-qty"><p>Large: <span class="green">$${p.price.lg_price}</span></p><input name="lg-qty" class="form-control" type="number" min="0" value="0"></div>` : "";
+            html+= checkIfPriceExists(p.id,"lg_price") ? `<div class="cart-qty"><p>Large: <span class="green">$${p.price.lg_price}</span></p><input name="lg-qty" class="form-control" type="number" min="0" value="${p.lgQty}" data-id="${p.id}"></div>` : "";
 
             html+=`<span class="remove-order" data-id="${p.id}">&times;</span>
             </div>
@@ -487,6 +439,96 @@ function fillSidebar(){
     }
 }
 
+function showNotification() {
+    var notification = document.getElementById("notification");
+    notification.style.display = "block";
+    setTimeout(function() {
+      notification.style.display = "none";
+    }, 3000); 
+  }
+
+
+function addToCart(id){
+
+    var ordered=[];
+   
+    if(getLS("cart")!=null){
+        ordered=getLS("cart");
+
+        updateProductNumber();
+
+        if(alreadyInCart()){
+            updateQty();
+        }
+        else{
+            ordered.push({
+                id:id,
+                qty:1,
+                mdQty:0,
+                lgQty:0
+            }); 
+            updateProductNumber();
+        }
+    }
+    else{
+        ordered.push({
+            id:id,
+            qty:1,
+            mdQty:0,
+            lgQty:0
+        });
+        updateProductNumber();
+    }
+    
+
+    function alreadyInCart(){
+        return ordered.find(el=>el.id==id);
+    }
+
+    function updateQty(){
+        for (let p of ordered) {
+            if(p.id==id){
+                p.qty++;
+                break;
+            }
+        }
+    }
+
+    saveLS("cart",ordered);
+}
+
+function updateProductNumber(){
+
+    let count=0;
+    var ordered=getLS("cart");
+    if(ordered==null){
+        count=0;
+    }
+    else{
+        for(let p of ordered)
+    {
+        if(checkIfPriceExists(p.id,"md_price")){
+            count+=p.mdQty;
+        }
+
+        if(checkIfPriceExists(p.id,"lg_price")){
+            count+=p.lgQty;
+        }
+
+        count+=p.qty;
+    }
+    }
+    document.getElementsByClassName("cart-count")[0].innerHTML= count;
+}
+
+function removeItem(id){
+    let ordered=getLS("cart");
+
+    let newArray=ordered.filter(el=>el.id!=id);
+    
+    saveLS("cart",newArray);
+}
+
 function getProductsForCart(){
     let ordered=getLS("cart");
     let products=getLS("products");
@@ -497,6 +539,8 @@ function getProductsForCart(){
         for(let o of ordered){
             if(el.id == o.id){
                 el.qty = o.qty;
+                el.mdQty=o.mdQty;
+                el.lgQty=o.lgQty;
                 return true;
             }
         }
