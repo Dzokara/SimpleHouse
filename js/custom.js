@@ -34,7 +34,7 @@ window.onload=function(){
 
         removeItem(id);
 
-        calculateTotal();
+        calculateTotal("cart");
 
         updateProductNumber();
 
@@ -46,7 +46,7 @@ window.onload=function(){
     });
 
     $(document).on("change",`.sidebar-content input[type="number"]`,function(){
-        calculateTotal();
+        calculateTotal("cart");
 
         let cartArray=getLS("cart");
 
@@ -71,7 +71,46 @@ window.onload=function(){
 
         updateProductNumber();
     });
+
+    //------ cart order form
+
+    var orderModal=document.getElementById("modal-order-container");
+
+    $(document).on("click","#orderButton",function(){
+        orderModal.classList.remove("d-none");
+        fillOrderModal();
+    })
+
+    $(document).on("click",".close-modal-order",function(){
+        orderModal.classList.add("d-none");
+    });
     
+    $(document).on("blur","#tbOrderName",function(){
+        reCheck(reName,$(this));
+    });
+
+    $(document).on("blur","#tbOrderPhone",function(){
+        reCheck(rePhone,$(this));
+    });
+
+    $(document).on("blur","#tbOrderAddress",function(){
+        reCheck(reAdress,$(this));
+    });
+
+    $(document).on("click","#btnOrderSubmit",function(){
+        let valid=validateForm("order");
+        if(valid){
+            localStorage.removeItem("cart");
+            fillSidebar();
+            updateProductNumber();
+            $("#table-row").html("");
+            $("#receipt").html("");
+            setTimeout(function timer(){
+                orderModal.classList.add("d-none");
+                sidebar.classList.add("d-none");
+            },3000);
+        }
+    });
     //--index page
     if(window.location.href.indexOf("index.html")>-1|| window.location.href.endsWith("/")){
         getData("dish_types",function(data){
@@ -146,7 +185,7 @@ window.onload=function(){
             agreementCheck($(this),$("#agreementText"));
         });
         $(document).on("click","#btnSubmit",function(){
-            validateForm();
+            validateForm("contact");
         });
 
 
@@ -432,7 +471,7 @@ function fillSidebar(){
     if(!empty)
     {
         $("#total").removeClass("d-none");
-        calculateTotal();
+        calculateTotal("cart");
     }
     else{
         $("#total").addClass("d-none");
@@ -549,7 +588,7 @@ function getProductsForCart(){
     return orderedProducts;
 }
 
-function calculateTotal(){
+function calculateTotal(type){
     let ordered=getProductsForCart();
     let total=0;
     let is=0;
@@ -572,8 +611,15 @@ function calculateTotal(){
         total+=p.price.sm_price*inputSm[is].value;
         is++;
     }
-    html=`<h2>Your total: <span class="green">$${parseFloat(total.toFixed(2))}</span></h2><input type="button" id="orderButton" class="tm-btn tm-btn-success" value="Order!"/>`;
-    $("#total").html(html);
+    if(type=="cart"){
+        html=`<h2>Your total: <span class="green">$${parseFloat(total.toFixed(2))}</span></h2><input type="button" id="orderButton" class="tm-btn tm-btn-success" value="Order!"/>`;
+        $("#total").html(html);
+        return;
+    }
+    if(type=="order"){
+        return total;
+    }
+    
 }
 
 function checkIfPriceExists(id,propName){
@@ -596,6 +642,93 @@ function checkIfPriceExists(id,propName){
         }
     }
     
+}
+
+function fillOrderModal(){
+    let html="";
+        let products=getProductsForCart();
+        let okProducts=products.filter(el=>{
+            return el.qty + el.mdQty + el.lgQty !=0;
+        });
+        let no=1;
+        html+=` <div class="modal-content">
+                    <span class="close-modal-order">&times;</span>
+                <div id="table-row" class="row">
+                    <table id="order-table">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Name</th>
+                                <th>Small</th>
+                                <th>Medium</th>
+                                <th>Big</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+
+                for (let p of okProducts) {
+                    html+= `<tr>
+                    <td>${no++}</td>
+                    <td>${p.name}</td>
+                    <td>${p.qty == 0 ? "X" : p.qty}</td>
+                    <td>${p.mdQty == 0 ? "X" : p.mdQty}</td>
+                    <td>${p.lgQty == 0 ? "X" : p.lgQty}</td>
+                    <td>$${totalForOneProduct(p.id)}</td>
+                </tr>`
+                }
+
+                html+=`      
+                        </tbody>
+                    </table>
+                </div>
+                <h3 id="receipt">Your receipt : <span class="green">$${calculateTotal("order")}</span></h3>
+                <div class="row">
+                <h2 id="delivery">Delivery info</h2>
+                <div class="tm-container-inner-2 tm-contact-section">
+                        <form action="" method="POST" id="orderForm">
+
+                            <div class="form-group">
+                                <input type="text" id="tbOrderName" name="name" class="form-control" placeholder="Name: John Doe"/>
+                                <span class="alert d-none">Name doesn't fit the format: Name Surname</span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="text" id="tbOrderPhone" name="phone" class="form-control" placeholder="Phone: 0621234567"/>
+                                <span class="alert d-none">Number doesn't fit the format: 0621234567</span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="text" id="tbOrderAddress" name="address" class="form-control" placeholder="Adress: Z. Celara 17"/>
+                                <span class="alert d-none">Address doesn't fit the format: Z. Celara 17 </span>
+                            </div>
+
+                            <div class="form-group tm-d-flex">
+                                <button type="button" id="btnOrderSubmit" class="tm-btn tm-btn-success tm-btn-right">
+                                Order!
+                                </button>
+                                <span id="success" class="d-none tm-text-success">Your order was successful!</span>
+                            </div>
+                        </form>
+                </div>
+            </div>
+            </div> `;
+    $("#modal-order").html(html);
+        
+     
+}
+
+function totalForOneProduct(id){
+    let total=0;
+    let products=getProductsForCart();
+    let product=products.find(el=>el.id==id);
+
+    checkIfPriceExists(id,"md_price") ? total+=product.mdQty*product.price.md_price : "";
+    checkIfPriceExists(id,"lg_price") ? total+=product.lgQty*product.price.lg_price : "";
+    total += product.qty*product.price.sm_price;
+
+    return total;
 }
 
 function sort(data){
@@ -687,6 +820,7 @@ function filterSync(){
 reName=/^[A-ZŠĐŽČĆ][a-zšđčćž]{2,14}(\s[A-ZŠĐŽČĆ][a-zšđčćž]{2,14})+$/;
 reEmail=/^[a-z0-9\.]+@[a-z]+\.[a-z]{2,3}$/;
 rePhone=/^06\d{7,8}$/;
+reAdress=/^[A-Za-zČĆŽĐŠčćžđš'\.\-\s\,0-9]{3,}$/;
 
 function addBorder(obj){
     obj.next('span').removeClass("d-none");
@@ -741,26 +875,41 @@ function checkDate(obj){
     }
 }
 
-function validateForm(){
-
-    let tbName=$("#tbName");
-    let tbPhone=$("#tbPhone");
-    let tbEmail=$("#tbEmail");
-    let date=$("#reservationDate");
-    let time=$("#reservationTime");
-    let chb=$("#agreement");
+function validateForm(type){
     let brGresaka=0;
-    !reCheck(reName,tbName) ? brGresaka++ : "";
-    !reCheck(rePhone,tbPhone) ? brGresaka++ : "";
-    !reCheck(reEmail,tbEmail) ? brGresaka++ : "";
-    !checkTime($(time).val(),time) ? brGresaka++ : "";
-    !checkDate(date) ? brGresaka++ : "";
-    !agreementCheck(chb,$("#agreementText")) ? brGresaka++ : "";
+    if(type=="contact"){
+        let tbName=$("#tbName");
+        let tbPhone=$("#tbPhone");
+        let tbEmail=$("#tbEmail");
+        let date=$("#reservationDate");
+        let time=$("#reservationTime");
+        let chb=$("#agreement");
+        !reCheck(reName,tbName) ? brGresaka++ : "";
+        !reCheck(rePhone,tbPhone) ? brGresaka++ : "";
+        !reCheck(reEmail,tbEmail) ? brGresaka++ : "";
+        !checkTime($(time).val(),time) ? brGresaka++ : "";
+        !checkDate(date) ? brGresaka++ : "";
+        !agreementCheck(chb,$("#agreementText")) ? brGresaka++ : "";
+    }
+    if(type=="order"){
+        let tbName=$("#tbOrderName");
+        let tbPhone=$("#tbOrderPhone");
+        let tbAddress=$("#tbOrderAddress");
+        !reCheck(reName,tbName) ? brGresaka++ : "";
+        !reCheck(rePhone,tbPhone) ? brGresaka++ : "";
+        !reCheck(reAdress,tbAddress) ? brGresaka++ : "";
+    }
     if(brGresaka==0){
-        document.getElementById("contactForm").reset();
+        if(type=="contact"){
+            document.getElementById("contactForm").reset();
+        }
+        if(type=="order"){
+            document.getElementById("orderForm").reset();
+        }
         document.getElementById("success").classList.remove("d-none");
         setTimeout(function timer(){
             document.getElementById("success").classList.add("d-none");
         },3000);
+    return true;
     }
 }
