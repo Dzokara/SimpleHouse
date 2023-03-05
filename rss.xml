@@ -1,0 +1,17 @@
+<rss version="2.0">
+    <channel>
+        <title>Simple House - Fast Food Shop</title>
+        <link>https://dzokara.github.io/SimpleHouse/index.html</link>
+        <description>Informations about the best delivery in the city.</description>
+        <item>
+            <title>About</title>
+            <link>https://dzokara.github.io/SimpleHouse/about.html</link>
+            <description>Informations about us, and our restaurant.</description>
+        </item>
+        <item>
+            <title>Reservations</title>
+            <link>https://dzokara.github.io/SimpleHouse/contact.html</link>
+            <description>Informations about the restaurant reservations.</description>
+        </item>
+    </channel>
+</rss>
