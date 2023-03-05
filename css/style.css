@@ -246,9 +246,6 @@ footer hr{
   justify-content: space-between;
   width:100%;
 }
-.cart-qty p{
-  width:100%;
-}
 .cart-qty input[type=number]{
   width: 15%;
   padding:0px;
@@ -288,6 +285,10 @@ footer hr{
   margin:0px auto;
   justify-content: space-between;
 }
+#order-form-container .form-control{
+  width:70%;
+  margin:0px auto;
+}
 #receipt{
   margin-bottom:50px;
   text-align: right;
@@ -320,6 +321,11 @@ footer hr{
     width:50%;
   }
 }
+@media(max-width:1100px){
+  #order-form-container .form-control{
+    width:100%;
+  }
+}
 @media(max-width:851px){
   .tm-header-inner{
     flex-direction: column;
@@ -331,6 +337,11 @@ footer hr{
     width:60%;
   }
 }
+@media(max-width:811px){
+  #orderForm span{
+    font-size:15px;
+  }
+}
 @media(max-width:767px){
   #author{
     flex-direction: column-reverse;
@@ -339,15 +350,75 @@ footer hr{
     margin-top:20px;
     width:50%;
    }
+   #order-form-container{
+    margin:0px auto;
+    padding:0px;
+    width:80%;
+   }
+   #orderForm{
+    width:100%;
+   }
 }
 @media(max-width:746px){
   #woman-eating{
     display:none;
   }
+  .sidebar-content img{
+    width:40%;
+  }
+}
+@media(max-width:711px){
+  #order-table{
+    display:block;
+    border-top:1px solid gray;
+  }
+  #order-table thead{
+    display:block;
+    float:left;
+  }
+  #order-table tbody{
+    overflow-x: scroll;
+    display:block;
+    white-space: nowrap;
+    width:auto;
+    border-top:none;
+  }
+  #order-table tr{
+    display: inline-block;
+  }
+
+  #order-table th, #order-table td{
+    display: block;
+    padding: 5px;
+  }
+}
+@media(max-width:654px){
+  #total{
+    flex-direction: column;
+    align-items: center;
+  }
+  #orderButton{
+    margin-top:10px;
+  }
+}
+@media(max-width:630px){
+  .cart-qty p{
+    width:50%;
+  }
+}
+@media(max-width:617px){
+  #order-form-container{
+    width:90%;
+  }
 }
 @media(max-width:600px){
   #sidebar{
     width:70%;
+  }
+}
+@media(max-width:540px){
+  #order-form-container{
+    width:100%;
   }
 }
 @media (min-width: 459px) {
@@ -365,6 +436,9 @@ footer hr{
    #sidebar{
     width:80%;
   }
+  .sidebar-content img{
+    width:50%;
+  }
 }
 @media (max-width: 355px){
   #navlinks{
@@ -377,6 +451,9 @@ footer hr{
   #author img{
     width:80%;
    }
+   .cart-qty p{
+    width:60%;
+  }
 }
 @media(max-width:330px){
   .tm-header-inner{

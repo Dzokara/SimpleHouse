@@ -686,7 +686,7 @@ function fillOrderModal(){
                 <h3 id="receipt">Your receipt : <span class="green">$${calculateTotal("order")}</span></h3>
                 <div class="row">
                 <h2 id="delivery">Delivery info</h2>
-                <div class="tm-container-inner-2 tm-contact-section">
+                <div id="order-form-container" class="tm-container-inner-2 tm-contact-section">
                         <form action="" method="POST" id="orderForm">
 
                             <div class="form-group">
