@@ -292,6 +292,7 @@ footer hr{
 #receipt{
   margin-bottom:50px;
   text-align: right;
+  margin-right:80px;
 }
 #orderForm{
   width:80%;
@@ -358,6 +359,7 @@ footer hr{
    #orderForm{
     width:100%;
    }
+  
 }
 @media(max-width:746px){
   #woman-eating{
@@ -394,6 +396,9 @@ footer hr{
   #order-table th, #order-table td{
     display: block;
     padding: 5px;
+  }
+  #receipt{
+    margin-right:20px;
   }
 }
 @media(max-width:654px){
@@ -444,6 +449,11 @@ footer hr{
     width:50%;
   }
 }
+@media(max-width:420px){
+  #receipt{
+    margin-right:0px;
+  }
+}
 @media (max-width: 355px){
   #navlinks{
     padding:0px;
@@ -457,6 +467,9 @@ footer hr{
    }
    .cart-qty p{
     width:60%;
+  }
+  #receipt{
+    font-size:17px;
   }
 }
 @media(max-width:330px){
