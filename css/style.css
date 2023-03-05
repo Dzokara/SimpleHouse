@@ -368,8 +368,12 @@ footer hr{
   }
 }
 @media(max-width:711px){
+  #table-row{
+    padding:0px;
+  }
   #order-table{
     display:block;
+    margin-top:40px;
     border-top:1px solid gray;
   }
   #order-table thead{
