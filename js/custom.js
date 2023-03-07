@@ -121,7 +121,7 @@ window.onload=function(){
             
             setTimeout(function timer(){
                 makeShop(data);
-            },0);
+            },1000);
             
             saveLS("products",data);
         });
