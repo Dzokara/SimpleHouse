@@ -805,7 +805,7 @@ function filterFood(data,type){
 function filterVegan(data){
 
    if(document.getElementById("veganBtn").classList.contains("clicked"))
-        return data.filter(x=>x.vegan==true);
+        return data.filter(x=>x.vegan);
     else  return data;
 }
 
